@@ -7,10 +7,19 @@ namespace SocialSecurityNumber
     {
         static void Main(string[] args)
         {
-            Console.Write("Social Security Number (YYMMDD-XXXX): ");
+            string socialSecurityNumber;
 
-            string socialSecurityNumber = Console.ReadLine();
-
+            if (args.Length > 0)
+            {
+                Console.WriteLine($"You provide: {args[0]}");
+                socialSecurityNumber = args[0];
+            }
+            else
+            {
+                Console.WriteLine("Please input ssn yymmdd-xxx:");
+                socialSecurityNumber = Console.ReadLine();
+            }
+                        
             int genderNumber = int.Parse(socialSecurityNumber.Substring(socialSecurityNumber.Length -2, 1));
 
             bool isFemale = genderNumber % 2 == 0;
