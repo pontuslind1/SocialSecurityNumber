@@ -14,7 +14,7 @@ namespace SocialSecurityNumber
             Console.Write("Please type in your first name: ");
             firstName = Console.ReadLine();
 
-            Console.Write("Please type in your last name: ");
+            Console.Write("Please type in your family name: ");
             lastName = Console.ReadLine();
 
             Console.Write("Please type in your Social securtiy number(YYYYMMDD-XXXX): ");
