@@ -11,17 +11,24 @@ namespace SocialSecurityNumber
             string lastName;
             string socialSecurityNumber;
 
-            Console.Write("Please type in your first name: ");
-            firstName = Console.ReadLine();
+            if (args.Length > 0)
+            {
+                firstName = args[0];
+                lastName = args[1];
+                socialSecurityNumber = args[2];
+            }
+            else
+            {
+                Console.Write("Please type in your first name: ");
+                firstName = Console.ReadLine();
 
-            Console.Write("Please type in your family name: ");
-            lastName = Console.ReadLine();
+                Console.Write("Please type in your family name: ");
+                lastName = Console.ReadLine();
 
-            Console.Write("Please type in your Social securtiy number(YYYYMMDD-XXXX): ");
-            socialSecurityNumber = Console.ReadLine();
-
-
-            Console.Clear();
+                Console.Write("Please type in your Social securtiy number(YYYYMMDD-XXXX): ");
+                socialSecurityNumber = Console.ReadLine();
+                Console.Clear();
+            }
 
             int genderNumber = int.Parse(socialSecurityNumber.Substring(socialSecurityNumber.Length - 2, 1));
 
