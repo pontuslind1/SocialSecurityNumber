@@ -3,6 +3,11 @@ using System.Globalization;
 
 namespace SocialSecurityNumber
 {
+    public enum Gender
+    {
+        Male,
+        Female
+    }
     class Program
     {
         static void Main(string[] args)
@@ -30,20 +35,11 @@ namespace SocialSecurityNumber
                 Console.Clear();
             }
 
-            int genderNumber = int.Parse(socialSecurityNumber.Substring(socialSecurityNumber.Length - 2, 1));
+            string gender = GetGender(socialSecurityNumber);
 
-            bool isFemale = genderNumber % 2 == 0;
-
-            string gender = isFemale ? "Female" : "Male";
-
-            DateTime birthDate = DateTime.ParseExact(socialSecurityNumber.Substring(0, 8), "yyyyMMdd", CultureInfo.InvariantCulture);
-
-            int age = DateTime.Today.Year - birthDate.Year;
-
-            if (birthDate.Month > DateTime.Today.Month || birthDate.Month == DateTime.Today.Month && birthDate.Day > DateTime.Now.Day)
-            {
-                age--;
-            }
+            DateTime birthDate;
+            int age;
+            CalculateAge(socialSecurityNumber, out birthDate, out age);
 
             const int silentGenerationStart = 1900;
             const int silentGenerationStop = 1945;
@@ -84,6 +80,26 @@ namespace SocialSecurityNumber
             Console.WriteLine($"Gender: {gender}");
             Console.WriteLine($"Age: {age}");
             Console.WriteLine($"Generation: {generation}");
+        }
+
+        private static void CalculateAge(string socialSecurityNumber, out DateTime birthDate, out int age)
+        {
+            birthDate = DateTime.ParseExact(socialSecurityNumber.Substring(0, 8), "yyyyMMdd", CultureInfo.InvariantCulture);
+            age = DateTime.Today.Year - birthDate.Year;
+            if (birthDate.Month > DateTime.Today.Month || birthDate.Month == DateTime.Today.Month && birthDate.Day > DateTime.Now.Day)
+            {
+                age--;
+            }
+        }
+
+        private static string GetGender(string socialSecurityNumber)
+        {
+            int genderNumber = int.Parse(socialSecurityNumber.Substring(socialSecurityNumber.Length - 2, 1));
+
+            bool isFemale = genderNumber % 2 == 0;
+
+            string gender = isFemale ? "Female" : "Male";
+            return gender;
         }
     }
 }
