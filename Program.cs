@@ -15,7 +15,7 @@ namespace SocialSecurityNumber
             string firstName;
             string lastName;
             string socialSecurityNumber;
-
+            
             if (args.Length > 0)
             {
                 firstName = args[0];
@@ -35,7 +35,7 @@ namespace SocialSecurityNumber
                 Console.Clear();
             }
 
-            string gender = GetGender(socialSecurityNumber);
+            Gender gender = GetGender(socialSecurityNumber);
 
             DateTime birthDate;
             int age;
@@ -92,13 +92,13 @@ namespace SocialSecurityNumber
             }
         }
 
-        private static string GetGender(string socialSecurityNumber)
+        private static Gender GetGender(string socialSecurityNumber)
         {
             int genderNumber = int.Parse(socialSecurityNumber.Substring(socialSecurityNumber.Length - 2, 1));
 
             bool isFemale = genderNumber % 2 == 0;
-
-            string gender = isFemale ? "Female" : "Male";
+           
+            Gender gender = isFemale ? Gender.Female : Gender.Male;
             return gender;
         }
     }
